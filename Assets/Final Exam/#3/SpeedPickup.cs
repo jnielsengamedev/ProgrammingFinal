@@ -15,10 +15,21 @@ using UnityEngine;
  *      - Change the speed back to the originalSpeed
  * 
  */
-public class SpeedPickup : MonoBehaviour
+public class SpeedPickup : PickUp
 {
     public float originalSpeed;
     public float boostedSpeed;
 
+    public override void Activate()
+    {
+        StartCoroutine(SpeedCoroutine());
+    }
 
+    private IEnumerator SpeedCoroutine()
+    {
+        originalSpeed = player.moveSpeed;
+        player.moveSpeed = boostedSpeed;
+        yield return new WaitForSeconds(2);
+        player.moveSpeed = originalSpeed;
+    }
 }

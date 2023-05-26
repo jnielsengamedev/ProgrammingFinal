@@ -23,13 +23,25 @@ public class Car : MonoBehaviour
    
     void Update()
     {
-
         /*
          * FINAL EXAM #1
          * Write a script that will allow movement.
          * The Vertical Axis should make the player move forwards and backwards
          * The Horizontal Axis should make the player rotate on the Vector3.back axis
          */
+        GetInput();
+        Movement();
+    }
 
+    private void Movement()
+    {
+        transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime * verticalInput));
+        transform.Rotate(Vector3.back, turnSpeed * Time.deltaTime * horizontalInput);
+    }
+
+    private void GetInput()
+    {
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
     }
 }
